@@ -1,0 +1,55 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+
+int main(void)
+{
+    float owed, quarterremains, dimeremains, nickelremains, pennyremains; 
+    int coins, quarternum, dimenum, nickelnum, pennynum;
+    coins = 0;
+    do
+    {
+        // Get user input in dollar notation.... Input of 5 is equal to 500 cents
+        owed = get_float("Owed: ");
+    }
+    while (owed < 0);
+    owed = round(owed * 100);
+    printf("%f cents\n", owed);
+    quarternum = trunc(owed/25.0);
+    quarterremains = fmod(owed, 25.0);
+    dimenum = trunc(quarterremains / 10.0);
+    dimeremains = fmod(quarterremains, 10.0);
+    nickelnum = trunc(dimeremains / 5.0);
+    nickelremains = fmod(dimeremains, 5.0);
+    pennynum = trunc(nickelremains / 1.0);
+    pennyremains = fmod(nickelremains, 1.0);
+    // Divide by quarters.
+    if (owed >= 25.0)
+    {
+        printf("%i quarters\n", quarternum);
+        coins = coins + quarternum;
+        printf("%i coins\n", coins);
+        printf("%f cents remain\n", quarterremains);
+    }
+    if (quarterremains < 25.0)
+    {
+        printf("%i dimes\n", dimenum);
+        coins = coins + dimenum;
+        printf("%i coins\n", coins);
+        printf("%f cents remain\n", dimeremains);
+    }
+    if (dimeremains < 10.0)
+    {
+        printf("%i nickels\n", nickelnum);
+        coins = coins + nickelnum;
+        printf("%i coins\n", coins);
+        printf("%f cents remain\n", nickelremains);
+    }
+    if (nickelremains < 5.0)
+    {
+        printf("%i pennies\n", pennynum);
+        coins = coins + pennynum;
+        printf("%i coins\n", coins);
+        printf("%f cents remain\n", pennyremains);
+    }
+}
