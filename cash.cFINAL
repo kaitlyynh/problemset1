@@ -14,7 +14,6 @@ int main(void)
     }
     while (owed < 0);
     owed = round(owed * 100);
-    printf("%f cents\n", owed);
     quarternum = trunc(owed/25.0);
     quarterremains = fmod(owed, 25.0);
     dimenum = trunc(quarterremains / 10.0);
@@ -26,7 +25,6 @@ int main(void)
     // Divide by quarters.
     if (owed >= 25.0)
     {
-        printf("%i quarters\n", quarternum);
         coins = coins + quarternum;
     }
     if (quarterremains < 25.0)
